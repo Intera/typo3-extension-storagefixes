@@ -11,14 +11,14 @@
 		}
 	],
 	"require": {
-		"php": "^7.0",
-		"typo3/cms": "^7.6"
+		"php": "^7.2",
+		"typo3/cms-core": "^9.5"
 	},
 	"replace": {
 		"typo3-ter/storagefixes": "self.version"
 	},
 	"require-dev": {
-		"nimut/testing-framework": "^4.2"
+		"nimut/testing-framework": "^5.2"
 	},
 	"config": {
 		"bin-dir": ".Build/bin",
