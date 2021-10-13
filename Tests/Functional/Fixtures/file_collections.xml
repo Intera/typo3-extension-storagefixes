@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <sys_file_collection>
+        <uid>31</uid>
+        <pid>10075</pid>
+        <tstamp>1401100301</tstamp>
+        <crdate>1401099763</crdate>
+        <cruser_id>109</cruser_id>
+        <sys_language_uid>0</sys_language_uid>
+        <l10n_parent>0</l10n_parent>
+        <deleted>0</deleted>
+        <hidden>0</hidden>
+        <starttime>0</starttime>
+        <endtime>0</endtime>
+        <title>A nice title</title>
+        <type>folder</type>
+        <files>0</files>
+        <storage>1</storage>
+        <folder>/folderB/folderA/</folder>
+        <category>0</category>
+        <recursive>0</recursive>
+    </sys_file_collection>
+    <sys_file_collection>
+        <uid>33</uid>
+        <pid>10075</pid>
+        <tstamp>1402654918</tstamp>
+        <crdate>1402654918</crdate>
+        <cruser_id>109</cruser_id>
+        <sys_language_uid>1</sys_language_uid>
+        <l10n_parent>31</l10n_parent>
+        <deleted>0</deleted>
+        <hidden>0</hidden>
+        <starttime>0</starttime>
+        <endtime>0</endtime>
+        <title>Ein netter Titel</title>
+        <type>folder</type>
+        <files>0</files>
+        <storage>1</storage>
+        <folder>/folderB/</folder>
+        <category>0</category>
+        <recursive>0</recursive>
+    </sys_file_collection>
+
+    <sys_file_collection>
+        <uid>41</uid>
+        <pid>10075</pid>
+        <tstamp>1401100301</tstamp>
+        <crdate>1401099763</crdate>
+        <cruser_id>109</cruser_id>
+        <sys_language_uid>0</sys_language_uid>
+        <l10n_parent>0</l10n_parent>
+        <deleted>0</deleted>
+        <hidden>0</hidden>
+        <starttime>0</starttime>
+        <endtime>0</endtime>
+        <title>A nice title</title>
+        <type>folder</type>
+        <files>0</files>
+        <storage>1</storage>
+        <folder>/folderA/</folder>
+        <category>0</category>
+        <recursive>0</recursive>
+    </sys_file_collection>
+    <sys_file_collection>
+        <uid>43</uid>
+        <pid>10075</pid>
+        <tstamp>1402654918</tstamp>
+        <crdate>1402654918</crdate>
+        <cruser_id>109</cruser_id>
+        <sys_language_uid>1</sys_language_uid>
+        <l10n_parent>31</l10n_parent>
+        <deleted>0</deleted>
+        <hidden>0</hidden>
+        <starttime>0</starttime>
+        <endtime>0</endtime>
+        <title>Ein netter Titel</title>
+        <type>folder</type>
+        <files>0</files>
+        <storage>1</storage>
+        <folder>/folderA/insideFolderA/</folder>
+        <category>0</category>
+        <recursive>0</recursive>
+    </sys_file_collection>
+</dataset>

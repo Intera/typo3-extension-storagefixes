@@ -1,0 +1,50 @@
+{
+	"name": "intera-typo3-extension/storagefixes",
+	"type": "typo3-cms-extension",
+	"description": "Adds missing storage features like cross storage directory moving / copying",
+	"license": "GPL-3.0+",
+	"authors": [
+		{
+			"name": "Alexander Stehlik",
+			"email": "astehlik.deleteme@intera.de",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^7.0",
+		"typo3/cms": "^7.6"
+	},
+	"replace": {
+		"typo3-ter/storagefixes": "self.version"
+	},
+	"require-dev": {
+		"nimut/testing-framework": "^4.2"
+	},
+	"config": {
+		"bin-dir": ".Build/bin",
+		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"typo3/cms": {
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"extension-key": "storagefixes",
+			"web-dir": ".Build/Web"
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Int\\StorageFixes\\": "Classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Int\\StorageFixes\\Tests\\": "Tests/"
+		}
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"mkdir -p .Build/Web/typo3conf/ext/",
+			"[ -L .Build/Web/typo3conf/ext/storagefixes ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/storagefixes"
+		]
+	}
+}

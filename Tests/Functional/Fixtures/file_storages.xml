@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <sys_file_storage>
+        <uid>1</uid>
+        <pid>0</pid>
+        <tstamp>1495809713</tstamp>
+        <crdate>1362149785</crdate>
+        <cruser_id>0</cruser_id>
+        <deleted>0</deleted>
+        <name>fileadmin/strorage1/</name>
+        <driver>Local</driver>
+        <configuration><![CDATA[
+            <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+            <T3FlexForms>
+                <data>
+                    <sheet index="sDEF">
+                        <language index="lDEF">
+                            <field index="basePath">
+                                <value index="vDEF">fileadmin/testing/storage1/</value>
+                            </field>
+                            <field index="pathType">
+                                <value index="vDEF">relative</value>
+                            </field>
+                            <field index="caseSensitive">
+                                <value index="vDEF">1</value>
+                            </field>
+                        </language>
+                    </sheet>
+                </data>
+            </T3FlexForms>
+        ]]>
+        </configuration>
+        <is_browsable>1</is_browsable>
+        <is_public>1</is_public>
+        <is_writable>1</is_writable>
+        <is_online>1</is_online>
+        <is_default>1</is_default>
+        <auto_extract_metadata>0</auto_extract_metadata>
+    </sys_file_storage>
+    <sys_file_storage>
+        <uid>2</uid>
+        <pid>0</pid>
+        <tstamp>1495809713</tstamp>
+        <crdate>1362149785</crdate>
+        <cruser_id>0</cruser_id>
+        <deleted>0</deleted>
+        <name>fileadmin/strorage2/</name>
+        <driver>Local</driver>
+        <configuration><![CDATA[
+            <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+            <T3FlexForms>
+                <data>
+                    <sheet index="sDEF">
+                        <language index="lDEF">
+                            <field index="basePath">
+                                <value index="vDEF">fileadmin/testing/storage2/</value>
+                            </field>
+                            <field index="pathType">
+                                <value index="vDEF">relative</value>
+                            </field>
+                            <field index="caseSensitive">
+                                <value index="vDEF">1</value>
+                            </field>
+                        </language>
+                    </sheet>
+                </data>
+            </T3FlexForms>
+        ]]>
+        </configuration>
+        <is_browsable>1</is_browsable>
+        <is_public>1</is_public>
+        <is_writable>1</is_writable>
+        <is_online>1</is_online>
+        <is_default>1</is_default>
+        <auto_extract_metadata>0</auto_extract_metadata>
+    </sys_file_storage>
+</dataset>
