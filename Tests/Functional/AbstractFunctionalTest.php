@@ -11,14 +11,14 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
 {
     protected $testExtensionsToLoad = ['typo3conf/ext/storagefixes'];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->cleanupFileadminRoot();
     }
 
-    protected function cleanupFileadminRoot()
+    protected function cleanupFileadminRoot(): void
     {
         if (is_dir($this->getFileadminRoot())) {
             GeneralUtility::rmdir($this->getFileadminRoot(), true);
@@ -30,7 +30,7 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
         return $this->getInstancePath() . '/fileadmin/testing/';
     }
 
-    protected function mkFileadminDir(string $directory)
+    protected function mkFileadminDir(string $directory): void
     {
         $fileadminDirectory = $this->getFileadminRoot() . $directory;
         if (!is_dir($fileadminDirectory)) {

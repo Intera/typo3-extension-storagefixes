@@ -15,7 +15,7 @@ final class PrefixReplacerTest extends AbstractUnitTest
      */
     private $prefixReplacer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->prefixReplacer = new PrefixReplacer();
     }
@@ -23,7 +23,7 @@ final class PrefixReplacerTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function nonMatchingPrefixThrowsException()
+    public function nonMatchingPrefixThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->prefixReplacer->replacePrefix('/some/other/prefix', '/what/prefix', '/new/prefix');
@@ -42,7 +42,7 @@ final class PrefixReplacerTest extends AbstractUnitTest
         string $oldPrefix,
         string $newPrefix,
         string $expectedResult
-    ) {
+    ): void {
         $result = $this->prefixReplacer->replacePrefix($prefixedString, $oldPrefix, $newPrefix);
         $this->assertEquals($expectedResult, $result);
     }

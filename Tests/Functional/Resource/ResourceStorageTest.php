@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 
 final class ResourceStorageTest extends AbstractFunctionalTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,7 +22,7 @@ final class ResourceStorageTest extends AbstractFunctionalTest
         $this->setUpBackendUserFromFixture(1);
     }
 
-    public function testCopyFolder()
+    public function testCopyFolder(): void
     {
         $folderA = ResourceFactory::getInstance()->getStorageObject(1)->getFolder('folderA');
         $targetFolder = ResourceFactory::getInstance()->getStorageObject(1)->getFolder('');
@@ -31,7 +31,7 @@ final class ResourceStorageTest extends AbstractFunctionalTest
         $this->assertFileadminFileExists('/storage1/folderCopy/subfolderA/textfile2.txt');
     }
 
-    public function testCopyFolderBetweenStorages()
+    public function testCopyFolderBetweenStorages(): void
     {
         $folderA = ResourceFactory::getInstance()->getStorageObject(1)->getFolder('folderA');
         $targetFolder = ResourceFactory::getInstance()->getStorageObject(2)->getFolder('');
@@ -40,7 +40,7 @@ final class ResourceStorageTest extends AbstractFunctionalTest
         $this->assertFileadminFileExists('/storage2/folderA/subfolderA/textfile2.txt');
     }
 
-    public function testMoveFolder()
+    public function testMoveFolder(): void
     {
         $folderA = ResourceFactory::getInstance()->getStorageObject(1)->getFolder('folderA');
         $targetFolder = ResourceFactory::getInstance()->getStorageObject(1)->getFolder('');
@@ -52,7 +52,7 @@ final class ResourceStorageTest extends AbstractFunctionalTest
         $this->assertFileadminFileExists('/storage1/folderMove/subfolderA/textfile2.txt');
     }
 
-    public function testMoveFolderBetweenStorages()
+    public function testMoveFolderBetweenStorages(): void
     {
         $folderA = ResourceFactory::getInstance()->getStorageObject(1)->getFolder('folderA');
         $targetFolder = ResourceFactory::getInstance()->getStorageObject(2)->getFolder('');
@@ -64,17 +64,17 @@ final class ResourceStorageTest extends AbstractFunctionalTest
         $this->assertFileadminFileExists('/storage2/folderA/subfolderA/textfile2.txt');
     }
 
-    private function assertFileadminDirectoryWasRemoved(string $path)
+    private function assertFileadminDirectoryWasRemoved(string $path): void
     {
         $this->assertDirectoryNotExists($this->getFileadminRoot() . $path);
     }
 
-    private function assertFileadminFileExists(string $pathAndFilename)
+    private function assertFileadminFileExists(string $pathAndFilename): void
     {
         $this->assertFileExists($this->getFileadminRoot() . $pathAndFilename);
     }
 
-    private function touchFileadminFile(string $pathAndFilename)
+    private function touchFileadminFile(string $pathAndFilename): void
     {
         $this->mkFileadminDir(dirname($pathAndFilename));
         touch($this->getFileadminRoot() . $pathAndFilename);

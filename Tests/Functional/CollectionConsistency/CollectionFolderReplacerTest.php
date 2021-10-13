@@ -6,7 +6,6 @@ namespace Int\StorageFixes\Tests\Functional\CollectionConsistency;
 
 use Int\StorageFixes\Tests\Functional\AbstractFunctionalTest;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class CollectionFolderReplacerTest extends AbstractFunctionalTest
 {
@@ -29,7 +28,7 @@ final class CollectionFolderReplacerTest extends AbstractFunctionalTest
         ],
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -48,7 +47,7 @@ final class CollectionFolderReplacerTest extends AbstractFunctionalTest
         $this->assertExpectedCollectionStructure();
     }
 
-    public function testFolderMoveReplacesIdentifier()
+    public function testFolderMoveReplacesIdentifier(): void
     {
         $folder = ResourceFactory::getInstance()->getFolderObjectFromCombinedIdentifier('1:/folderB/');
         $targetFolder = ResourceFactory::getInstance()->getFolderObjectFromCombinedIdentifier('1:/folderA/');
@@ -60,7 +59,7 @@ final class CollectionFolderReplacerTest extends AbstractFunctionalTest
         $this->assertExpectedCollectionStructure();
     }
 
-    public function testFolderMoveReplacesStorageUid()
+    public function testFolderMoveReplacesStorageUid(): void
     {
         $folder = ResourceFactory::getInstance()->getFolderObjectFromCombinedIdentifier('1:/folderB/');
         $targetFolder = ResourceFactory::getInstance()->getFolderObjectFromCombinedIdentifier('2:/');
@@ -71,7 +70,7 @@ final class CollectionFolderReplacerTest extends AbstractFunctionalTest
         $this->assertExpectedCollectionStructure();
     }
 
-    public function testFolderRenameInOtherStorageIsIgnored()
+    public function testFolderRenameInOtherStorageIsIgnored(): void
     {
         $folder = ResourceFactory::getInstance()->getFolderObjectFromCombinedIdentifier('2:/folderA/');
         $folder->rename('renamed');
@@ -79,7 +78,7 @@ final class CollectionFolderReplacerTest extends AbstractFunctionalTest
         $this->assertExpectedCollectionStructure();
     }
 
-    public function testFolderRenameReplacesPrefix()
+    public function testFolderRenameReplacesPrefix(): void
     {
         $folder = ResourceFactory::getInstance()->getFolderObjectFromCombinedIdentifier('1:/folderA/');
         $folder->rename('renamed');
@@ -89,10 +88,10 @@ final class CollectionFolderReplacerTest extends AbstractFunctionalTest
         $this->assertExpectedCollectionStructure();
     }
 
-    private function assertCollectionFolderIs(int $collectionUid, int $expectedStorage, string $expectedFolder)
+    private function assertCollectionFolderIs(int $collectionUid, int $expectedStorage, string $expectedFolder): void
     {
         $collectionOriginal = $this->getDatabaseConnection()->selectSingleRow(
-            'storage,folder',
+            '*',
             'sys_file_collection',
             'uid=' . $collectionUid
         );
@@ -100,7 +99,7 @@ final class CollectionFolderReplacerTest extends AbstractFunctionalTest
         $this->assertEquals($expectedStorage, (int)$collectionOriginal['storage']);
     }
 
-    private function assertExpectedCollectionStructure()
+    private function assertExpectedCollectionStructure(): void
     {
         foreach ($this->expectedCollections as $collectionUid => $collectionData) {
             $this->assertCollectionFolderIs($collectionUid, $collectionData['storage'], $collectionData['identifier']);
