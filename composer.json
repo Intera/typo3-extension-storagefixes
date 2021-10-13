@@ -12,6 +12,7 @@
 	],
 	"require": {
 		"php": "^7.2",
+		"ext-pdo": "*",
 		"typo3/cms-core": "^9.5"
 	},
 	"replace": {
