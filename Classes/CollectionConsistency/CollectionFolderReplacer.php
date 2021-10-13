@@ -19,12 +19,12 @@ final class CollectionFolderReplacer
      */
     private $prefixReplacer;
 
-    public function injectCollectionRepository(FileCollectionRepository $collectionRepository)
+    public function injectCollectionRepository(FileCollectionRepository $collectionRepository): void
     {
         $this->collectionRepository = $collectionRepository;
     }
 
-    public function injectPrefixReplacer(PrefixReplacer $prefixReplacer)
+    public function injectPrefixReplacer(PrefixReplacer $prefixReplacer): void
     {
         $this->prefixReplacer = $prefixReplacer;
     }
@@ -34,7 +34,7 @@ final class CollectionFolderReplacer
         string $oldPrefix,
         int $newStorageUid,
         string $newPrefix
-    ) {
+    ): void {
         $collections = $this->collectionRepository->findManyByStorageAndFolderPrefix(
             $oldStorageUid,
             $oldPrefix
@@ -47,7 +47,7 @@ final class CollectionFolderReplacer
         }
     }
 
-    private function replaceFolderPrefix(FileCollection $collection, string $oldPrefix, string $newPrefix)
+    private function replaceFolderPrefix(FileCollection $collection, string $oldPrefix, string $newPrefix): void
     {
         $newColledtionFolder = $this->prefixReplacer->replacePrefix(
             $collection->getFolder(),

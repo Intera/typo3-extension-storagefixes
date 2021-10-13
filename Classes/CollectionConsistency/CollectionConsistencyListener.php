@@ -13,12 +13,12 @@ final class CollectionConsistencyListener
      */
     private $collectionFolderReplacer;
 
-    public function injectCollectionFolderReplacer(CollectionFolderReplacer $collectionFolderReplacer)
+    public function injectCollectionFolderReplacer(CollectionFolderReplacer $collectionFolderReplacer): void
     {
         $this->collectionFolderReplacer = $collectionFolderReplacer;
     }
 
-    public function onFolderMove(Folder $folder, Folder $targetFolder, string $newName)
+    public function onFolderMove(Folder $folder, Folder $targetFolder, string $newName): void
     {
         $oldIdentifier = $folder->getIdentifier();
         $newIdentifier = $targetFolder->getIdentifier() . $newName . '/';
@@ -31,7 +31,7 @@ final class CollectionConsistencyListener
         );
     }
 
-    public function onFolderRename(Folder $folder, $newName)
+    public function onFolderRename(Folder $folder, $newName): void
     {
         $this->processCollections(
             $folder->getStorage()->getUid(),
@@ -41,8 +41,12 @@ final class CollectionConsistencyListener
         );
     }
 
-    private function processCollections(int $oldStorageUid, string $oldPrefix, int $newStorageUid, string $newPrefix)
-    {
+    private function processCollections(
+        int $oldStorageUid,
+        string $oldPrefix,
+        int $newStorageUid,
+        string $newPrefix
+    ): void {
         $this->collectionFolderReplacer->replaceFolderInCollections(
             $oldStorageUid,
             $oldPrefix,
