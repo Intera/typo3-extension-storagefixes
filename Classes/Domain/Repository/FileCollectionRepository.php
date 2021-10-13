@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Int\StorageFixes\Domain\Repository;
 
+use Doctrine\DBAL\FetchMode;
 use Int\StorageFixes\Domain\Model\FileCollection;
-use phpDocumentor\Reflection\Types\Collection;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\Persistence\Repository;
+use PDO;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class FileCollectionRepository
 {
@@ -22,51 +22,53 @@ final class FileCollectionRepository
      */
     public function findManyByStorageAndFolderPrefix(int $storageUid, string $folderPrefix): array
     {
-        $db = $this->getDatabaseConnection();
-        $result = $db->exec_SELECTquery(
-            '*',
-            self::TABLE_NAME,
-            'type=' . $db->fullQuoteStr('folder', self::TABLE_NAME)
-            . ' AND storage=' . $storageUid
-            . ' AND folder LIKE ' . $db->fullQuoteStr(
-                $db->escapeStrForLike($folderPrefix, self::TABLE_NAME) . '%',
-                self::TABLE_NAME
+        $query = $this->getQueryBuilder();
+        $query->getRestrictions()->removeAll();
+        $result = $query->select('*')
+            ->from(self::TABLE_NAME)
+            ->andWhere($query->expr()->eq('type', $query->expr()->literal('folder')))
+            ->andWhere($query->expr()->eq('storage', $query->createNamedParameter($storageUid, PDO::PARAM_INT)))
+            ->andWhere(
+                $query->expr()->like(
+                    'folder',
+                    $query->createNamedParameter($query->escapeLikeWildcards($folderPrefix) . '%')
+                )
             )
-        );
+            ->execute();
+
         $collections = [];
-        while ($row = $db->sql_fetch_assoc($result)) {
+        while ($row = $result->fetch(FetchMode::ASSOCIATIVE)) {
             $collections[] = FileCollection::createFromRow($row);
         }
         return $collections;
     }
 
-    public function getAllLanguageUids(): array
+    public function update(FileCollection $collection): void
     {
-        $db = $this->getDatabaseConnection();
-        $result = $db->exec_SELECTquery(
-            'sys_language_uid',
-            self::TABLE_NAME,
-            'sys_language_uid > 0',
-            'sys_language_uid'
-        );
-        $languageUids = [];
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $languageUids[] = (int)$row['sys_language_uid'];
+        $updateQuery = $this->getQueryBuilder()->update(self::TABLE_NAME);
+
+        foreach ($collection->toRow() as $column => $value) {
+            $updateQuery->set($column, $value);
         }
-        return $languageUids;
-    }
 
-    public function getDatabaseConnection(): DatabaseConnection
-    {
-        return $GLOBALS['TYPO3_DB'];
-    }
-
-    public function update(FileCollection $collection)
-    {
-        $this->getDatabaseConnection()->exec_UPDATEquery(
-            self::TABLE_NAME,
-            'uid=' . $collection->getUid(),
-            $collection->toRow()
+        $updateQuery->getRestrictions()->removeAll();
+        $updateQuery->andWhere(
+            $updateQuery->expr()->eq(
+                'uid',
+                $updateQuery->createNamedParameter($collection->getUid(), PDO::PARAM_INT)
+            )
         );
+
+        $updateQuery->execute();
+    }
+
+    private function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->getConnectionPool()->getQueryBuilderForTable(self::TABLE_NAME);
     }
 }
